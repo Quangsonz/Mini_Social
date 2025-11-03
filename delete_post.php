@@ -24,13 +24,13 @@ $result = $stmt->get_result();
 $post = $result->fetch_assoc();
 
 if(!$post) {
-    $_SESSION['error'] = "Bài viết không tồn tại!";
+    $_SESSION['error'] = "Bài viết không tồn tại! ID: " . $post_id;
     header("Location: home.php");
     exit();
 }
 
 // Thực hiện xóa bài viết
-if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+if ($_SERVER['REQUEST_METHOD'] === 'GET'){
     $stmt = $config->prepare("DELETE FROM posts WHERE id = ?");
     $stmt->bind_param("i", $post_id);
     if($stmt->execute()) {

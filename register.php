@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 include 'config.php';
 
@@ -25,7 +26,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             $error = "Tài khoản đã tồn tại!";
         }else{
             $role = "user";
-            $password = password_hash($password, PASSWORD_DEFAULT);
+            // Không hash password - lưu plaintext để test SQLi
             $stmt = $config -> prepare("INSERT INTO users ( username, password, role) VALUES (?,?,?)");
             $stmt -> bind_param("sss",$username, $password, $role);
             if($stmt -> execute()){
@@ -66,7 +67,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         <form action="register.php" method="post" autocomplete="off">
             <div class="form-group">
                 <span class="input-icon"><i class="fa fa-envelope"></i></span>
-                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input type="text" id="username" name="username" value="<?php echo $_POST['username'] ?? ''; ?>" placeholder="Username" required>
             </div>
             <div class="form-group">
                 <span class="input-icon"><i class="fa fa-lock"></i></span>

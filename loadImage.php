@@ -1,23 +1,17 @@
 <?php
-// VULN: chỉ để phục vụ test path traversal
-$baseDir = __DIR__ . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR;
-$filename = $_GET['filename'] ?? '';
-$path = $baseDir . $filename; // lỗi: nối thẳng chuỗi
 
-if (!file_exists($path)) {
+$baseDir = __DIR__ . "/uploads/" .DIRECTORY_SEPARATOR;
+$filename = $_GET['filename'] ?? '';
+$path = $baseDir . $filename; // lỗi nối chuỗi trực tiếp và không chuẩn hóa dường dẫn
+
+// thiếu kiểm tra path có nằm trong thư mục uploads không chỉ kiểm tra tồn tại file
+if (!file_exists($path)) { 
 	header("HTTP/1.1 404 Not Found");
 	exit('Not found');
 }
 
-// best-effort content type
-$ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+// thiếu giới hạn định dạng file được phép tải
 $mime = 'application/octet-stream';
-if ($ext === 'png') { $mime = 'image/png'; }
-elseif ($ext === 'jpg' || $ext === 'jpeg') { $mime = 'image/jpeg'; }
-elseif ($ext === 'gif') { $mime = 'image/gif'; }
-elseif ($ext === 'webp') { $mime = 'image/webp'; }
-elseif ($ext === 'svg') { $mime = 'image/svg+xml'; }
-else { $mime = 'text/plain; charset=utf-8'; }
 
 header('Content-Type: ' . $mime);
 readfile($path);

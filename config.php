@@ -1,5 +1,5 @@
 <?php
-    $config = new mysqli('localhost', 'root', '', 'mini_social');
+    $config = new mysqli('localhost', 'root', '', 'mini_social_error');
     if($config->connect_error){
         die('Kết nối thất bại ' . $config->connect_error);
     }

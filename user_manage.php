@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 include 'config.php';
 
@@ -31,6 +32,7 @@ if ($result) {
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="style.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         /* Global styles from home.php, simplified */
         body {
@@ -266,7 +268,8 @@ if ($result) {
         <div class="header-content">
             <h2>Quản lý người dùng</h2>
             <div>
-            <span style="color: #fff; margin-right: 10px;"><?php echo htmlspecialchars($_SESSION['username']); ?>!</span>
+                
+            <span style="color: #fff; margin-right: 10px;"><?php echo $_SESSION['username']; ?>!</span>
                 <a href="index.php" class="btn" style="padding: 6px 18px; width: auto;">Logout</a>
                 <a href="home.php" class="btn" style="padding: 6px 18px; width: auto;">Home</a>
             </div>
@@ -287,7 +290,7 @@ if ($result) {
         <button class="btn btn-add" style="margin-bottom: 20px;" onclick="openAddUserModal()">
             <i class="fas fa-plus"></i> Thêm người dùng mới
         </button>
-
+            
         <table class="user-table">
             <thead>
                 <tr>
@@ -300,15 +303,15 @@ if ($result) {
             <tbody id="userTableBody">
                 <?php foreach($users as $user): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($user['id']); ?></td>
-                    <td><?php echo htmlspecialchars($user['username']); ?></td>
+                    <td><?php echo $user['id']; ?></td>
+                    <td><?php echo $user['username']; ?></td>
                     <td>
                         <span class="<?php echo $user['role'] === 'admin' ? 'role-admin' : 'role-user'; ?>">
                             <?php echo $user['role'] === 'admin' ? 'Admin' : 'User'; ?>
                         </span>
                     </td>
                     <td>
-                        <button class="btn btn-action btn-edit" style="width: 100px;" onclick="openEditModal(<?php echo $user['id']; ?>, '<?php echo htmlspecialchars($user['username']); ?>', '<?php echo htmlspecialchars($user['role']); ?>')">
+                        <button class="btn btn-action btn-edit" style="width: 100px;" onclick="openEditModal(<?php echo $user['id']; ?>, '<?php echo $user['username']; ?>', '<?php echo $user['role']; ?>')">
                             <i class="fas fa-edit"></i> Sửa
                         </button>
                         <form action="delete_user.php" method="POST" style="display: inline;">
@@ -322,6 +325,7 @@ if ($result) {
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <a id="backLink" href="#" class="btn" style="padding: 6px 18px; width: auto; margin-right: 10px;">Back</a>
     </div>
 
     <!-- Edit User Modal -->
@@ -381,7 +385,7 @@ if ($result) {
             </form>
         </div>
     </div>
-
+    
     <script>
         // Chức năng tìm kiếm
         document.getElementById('searchInput').addEventListener('input', function(e) {
@@ -425,6 +429,19 @@ if ($result) {
                 closeModal('addUserModal');
             }
         }
+
+
+        $(function() {
+            try {
+                var params = new URLSearchParams(window.location.search);
+                var returnPath = params.get('returnPath');
+                if (returnPath) {
+                    $('#backLink').attr('href', returnPath);
+                }
+            } catch (e) {
+                // ignore
+            }
+        });
     </script>
 </body>
 </html>
