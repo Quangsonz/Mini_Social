@@ -8,6 +8,7 @@ $success = "";
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $username = trim($_POST['username']);
+    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
     $password = trim($_POST['password']);
     $confirm_password = trim($_POST['confirm_password']);
 
@@ -27,10 +28,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         }else{
             $role = "user";
             // Không hash password - lưu plaintext để test SQLi
-            $stmt = $config -> prepare("INSERT INTO users ( username, password, role) VALUES (?,?,?)");
-            $stmt -> bind_param("sss",$username, $password, $role);
+            $stmt = $config -> prepare("INSERT INTO users ( username, email, password, role) VALUES (?,?,?,?)");
+            $stmt -> bind_param("ssss",$username, $email, $password, $role);
             if($stmt -> execute()){
-                $success = "Đăng ký thành công";
+                $success = "Đăng ký thành công.";
             }else{
                 $error = "Đăng ký thất bại!";
             }
@@ -65,6 +66,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             <i class="fa fa-user-plus"></i>
         </div>
         <form action="register.php" method="post" autocomplete="off">
+            <div class="form-group">
+                <span class="input-icon"><i class="fa fa-at"></i></span>
+                <input type="email" id="email" name="email" value="<?php echo $_POST['email'] ?? ''; ?>" placeholder="Email (tùy chọn)">
+            </div>
             <div class="form-group">
                 <span class="input-icon"><i class="fa fa-envelope"></i></span>
                 <input type="text" id="username" name="username" value="<?php echo $_POST['username'] ?? ''; ?>" placeholder="Username" required>

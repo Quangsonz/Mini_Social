@@ -2,8 +2,11 @@
 session_start();
 include 'config.php';
 
-// Kiểm tra quyền admin
-if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
+// LỖ HỔNG: Kiểm tra role từ tham số URL hoặc POST nếu có, nếu không thì mới kiểm tra từ session
+// bypass bằng cách thêm ?role=admin vào URL hoặc role=admin trong POST
+$userRole = isset($_GET['role']) ? $_GET['role'] : (isset($_POST['role']) ? $_POST['role'] : (isset($_SESSION['role']) ? $_SESSION['role'] : 'user'));
+
+if (!isset($_SESSION['username']) || $userRole !== 'admin') {
     header('Location: index.php');
     exit();
 }

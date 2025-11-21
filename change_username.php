@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		header('Location: profile.php');
 		exit();
 	}
-	// if (!isset($_SESSION['csrf']) || !hash_equals($_SESSION['csrf'], $csrf)) {
 	// Lỗ hổng: chỉ kiểm tra CSRF khi có tham số csrf, nếu thiếu thì bypass
 	if ($csrf !== '' && (!isset($_SESSION['csrf']) || !hash_equals($_SESSION['csrf'], $csrf))) {
 		$_SESSION['error'] = 'CSRF token không hợp lệ';

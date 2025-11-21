@@ -3,7 +3,11 @@
 session_start();
 include 'config.php';
 
-if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
+// LỖ HỔNG: Kiểm tra role từ tham số URL nếu có, nếu không thì mới kiểm tra từ session
+// bypass bằng cách thêm ?role=admin vào URL
+$userRole = isset($_GET['role']) ? $_GET['role'] : (isset($_SESSION['role']) ? $_SESSION['role'] : 'user');
+
+if (!isset($_SESSION['username']) || $userRole !== 'admin') {
     header('Location: index.php');
     exit();
 }
@@ -343,6 +347,10 @@ if ($result) {
                     <input type="text" id="editUsername" name="username" required>
                 </div>
                 <div class="form-group">
+                    <label for="editEmail">Email (tùy chọn)</label>
+                    <input type="email" id="editEmail" name="email">
+                </div>
+                <div class="form-group">
                     <label for="editRole">Role</label>
                     <select id="editRole" name="role" required>
                         <option value="user">User</option>
@@ -366,6 +374,10 @@ if ($result) {
                 <div class="form-group">
                     <label for="newUsername">Username</label>
                     <input type="text" id="newUsername" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="newEmail">Email (tùy chọn)</label>
+                    <input type="email" id="newEmail" name="email">
                 </div>
                 <div class="form-group">
                     <label for="newPassword">Password</label>

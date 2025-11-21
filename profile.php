@@ -1,11 +1,29 @@
 <?php
 
 session_start();
+include 'config.php';
 
 if (!isset($_SESSION['username'])) {
 	header('Location: index.php');
 	exit();
 }
+
+// LỖ HỔNG IDOR: Lấy thông tin user từ database
+// cho phép xem profile bất kỳ user nào qua parameter ?id=X
+$view_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+if ($view_id) {
+    $stmt = $config->prepare("SELECT id, username, email, role FROM users WHERE id = ?");
+    $stmt->bind_param("i", $view_id);
+} else {
+    $username = $_SESSION['username'];
+    $stmt = $config->prepare("SELECT id, username, email, role FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+}
+$stmt->execute();
+$result = $stmt->get_result();
+$user_info = $result->fetch_assoc();
+$stmt->close();
 
 $avatar = isset($_GET['avatar']) ? $_GET['avatar'] : 'avatar.png';
 // Show flash messages
@@ -53,13 +71,22 @@ if (empty($_SESSION['csrf'])) {
 				<?php echo htmlspecialchars($error); ?>
 			</div>
 		<?php endif; ?>
+		
+		<!-- Hiển thị thông tin user -->
+		<?php if ($user_info): ?>
+		<div style="margin-bottom:20px;">
+			<h3 style="color:#fff;">Thông tin tài khoản</h3>
+			<p style="color:#fff;"><strong>User ID:</strong> <?php echo htmlspecialchars($user_info['id']); ?></p>
+			<p style="color:#fff;"><strong>Username:</strong> <?php echo htmlspecialchars($user_info['username']); ?></p>
+			<p style="color:#fff;"><strong>Email:</strong> <?php echo htmlspecialchars($user_info['email']); ?></p>
+			<p style="color:#fff;"><strong>Role:</strong> <?php echo htmlspecialchars($user_info['role']); ?></p>
+		</div>
+		<?php endif; ?>
+		
 		<div style="display:flex; align-items:center; gap:20px;">
-			<img src="loadImage.php?filename=<?php echo $avatar; ?>" alt="avatar" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:2px solid #2ecfff;">
+			<img src="loadImage.php?filename=<?php echo htmlspecialchars($avatar); ?>" alt="avatar" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:2px solid #2ecfff;">
 			<div>
-				<div style="color:#fff;font-size:20px;font-weight:600;">
-					<i class="fa fa-user"></i> <?php echo $_SESSION['username']; ?>
-				</div>
-				<form action="change_username.php" method="POST" style="margin-top:12px; display:flex; gap:8px; align-items:center;">
+				<form action="change_username.php" method="POST" style="display:flex; gap:8px; align-items:center;">
 					<input type="text" name="new_username" placeholder="Nhập username mới" required style="padding:10px; border:1px solid rgba(255,255,255,0.2); border-radius:5px; background: rgba(255,255,255,0.1); color:#fff;">
 					<input type="hidden" name="csrf" value="<?php echo htmlspecialchars($_SESSION['csrf']); ?>">
 					<button type="submit" class="btn" style="padding: 8px 18px;">Đổi username</button>

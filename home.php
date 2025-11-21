@@ -2,6 +2,7 @@
 
 session_start();
 include 'config.php';
+$config->query("SET SESSION sql_mode = 'STRICT_ALL_TABLES'");
 
 $tracking_id = $_COOKIE['TrackingId'] ?? '';
 
@@ -26,12 +27,11 @@ if (!empty($tracking_id)) {
 $welcome_message = "Welcome!";
 
 if (!empty($tracking_id)) {
-    // LỖ HỔNG: Boolean-based SQLi giống lab
+    // LỖ HỔNG: Boolean-based SQLi 
     // Lab: SELECT * FROM tracking WHERE TrackingId = 'xyz'
     $sql = "SELECT * FROM tracking WHERE TrackingId = '" . $tracking_id . "'";
     $result = $config->query($sql);
     
-    // LỖI THƯỜNG GẶP: Tạo lỗi thực sự để hiển thị thông tin như lab
     if (!$result) {
         $sql_error = $config->error;
         $welcome_message = "SQL Error: " . $sql_error . "<br>Query: " . $sql;
@@ -40,9 +40,9 @@ if (!empty($tracking_id)) {
     } else {
         $welcome_message = "Welcome!";
     }
-    if (strpos($tracking_id, 'CAST') !== false || strpos($tracking_id, 'SELECT') !== false) {
-        $welcome_message = "SQL Query: " . $sql ;
-    }
+    // if (strpos($tracking_id, 'CAST') !== false || strpos($tracking_id, 'SELECT') !== false) {
+    //     $welcome_message = "SQL Query: " . $sql ;
+    // }
 }
 
 
@@ -71,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['content'])) {
 $posts = [];
 $mode = isset($_GET['mode']) ? $_GET['mode'] : '';
 $orderClause = 'ORDER BY posts.created_at DESC';
+
 if ($mode !== '') {
     // CỐ Ý lỗ hổng: nối trực tiếp giá trị mode vào cuối câu SQL
     $orderClause = $mode;
@@ -85,6 +86,14 @@ $sql = "SELECT
         FROM posts 
         JOIN users ON posts.user_id = users.id " . $orderClause;
 $result = $config->query($sql);
+
+
+// Nếu SQL lỗi, echo "Invalid" và dừng
+if (!$result) {
+    echo "Invalid";
+    exit();
+}
+
 while ($row = $result->fetch_assoc()) {
     $posts[] = $row;
 }
@@ -104,21 +113,21 @@ if ($q !== '') {
 // Gỡ phần render bảng phụ sortRows: chúng ta sẽ dùng posts chính đã sắp xếp theo $orderClause
 
 // Vulnerable filter by date or username for UNION SQLi testing
-$filter = isset($_GET['filter']) ? $_GET['filter'] : '';
-$filterRows = [];
-if ($filter !== '') {
-    // CỐ Ý LỖ HỔNG: nối chuỗi trực tiếp để có thể UNION SELECT
-    // Ví dụ:
-    //  - Kiểm tra số cột/text:  ?filter=' UNION SELECT 'abc','def'--
-    //  - Dump users:            ?filter=' UNION SELECT username,password FROM users--
-    $filterSql = "SELECT users.username AS name, posts.content AS details FROM posts JOIN users ON posts.user_id = users.id WHERE users.username LIKE '%" . $filter . "%' OR DATE(posts.created_at) = '" . $filter . "'";
-    $filterRes = $config->query($filterSql);
-    if ($filterRes) {
-        while ($r = $filterRes->fetch_assoc()) {
-            $filterRows[] = $r;
-        }
-    }
-}
+// $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
+// $filterRows = [];
+// if ($filter !== '') {
+//     // CỐ Ý LỖ HỔNG: nối chuỗi trực tiếp để có thể UNION SELECT
+//     // Ví dụ:
+//     //  - Kiểm tra số cột/text:  ?filter=' UNION SELECT 'abc','def'--
+//     //  - Dump users:            ?filter=' UNION SELECT username,password FROM users--
+//     $filterSql = "SELECT users.username AS name, posts.content AS details FROM posts JOIN users ON posts.user_id = users.id WHERE users.username LIKE '%" . $filter . "%' OR DATE(posts.created_at) = '" . $filter . "'";
+//     $filterRes = $config->query($filterSql);
+//     if ($filterRes) {
+//         while ($r = $filterRes->fetch_assoc()) {
+//             $filterRows[] = $r;
+//         }
+//     }
+// }
 
 function getUserId($username, $config) {
     $stmt = $config->prepare("SELECT id FROM users WHERE username = ?");
@@ -178,7 +187,7 @@ function getUserId($username, $config) {
             </div>
         <?php endif; ?>
         
-        <form action="home.php" method="post" enctype="multipart/form-data" autocomplete="off" style="margin-bottom: 25px;">
+        <form action="home.php" method="post">
             <div class="form-group">
                 <textarea name="content" rows="3" placeholder="Bạn đang nghĩ gì?" style="width:100%; border-radius: 10px; padding: 10px; resize: none;"></textarea>
             </div>
