@@ -2,7 +2,6 @@
 
 session_start();
 include 'config.php';
-$config->query("SET SESSION sql_mode = 'STRICT_ALL_TABLES'");
 
 $tracking_id = $_COOKIE['TrackingId'] ?? '';
 
@@ -88,7 +87,7 @@ $sql = "SELECT
 $result = $config->query($sql);
 
 
-// Nếu SQL lỗi, echo "Invalid" và dừng
+// // Nếu SQL lỗi, echo "Invalid" và dừng
 if (!$result) {
     echo "Invalid";
     exit();

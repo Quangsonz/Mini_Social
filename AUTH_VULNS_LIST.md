@@ -15,9 +15,6 @@
 4. **Không Validate Input** - `index.php:14-15`
    - Không trim, không validate format, không giới hạn độ dài
    
-5. **SQL Injection trong Filter** - `home.php:114`
-   - `$filterSql = "... WHERE ... LIKE '%" . $filter . "%' ..."`
-   
 6. **Không có Rate Limiting** - `index.php`
    - Không giới hạn số lần login attempt
    
