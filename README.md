@@ -13,8 +13,12 @@
 [Phan Đức Dương: 22810310282 ] |  Cơ sở hạ tầng và Tổng hợp Báo cáo: Cài đặt và cấu hình môi trường thực nghiệm (XAMPP, CSDL). Hỗ trợ chụp ảnh minh họa Burp Suite, biên tập và tổng hợp báo cáo chuyên đề    
 
 
-<img width="748" height="581" alt="image" src="https://github.com/user-attachments/assets/58511424-b0bf-46e9-8b9c-235d886c304b" />             
-<img width="722" height="253" alt="image" src="https://github.com/user-attachments/assets/aed424c3-aead-4b35-a602-47369884e9ee" />                
+<img width="748" height="581" alt="image" src="https://github.com/user-attachments/assets/58511424-b0bf-46e9-8b9c-235d886c304b" />     
+<img width="1130" height="95" alt="image" src="https://github.com/user-attachments/assets/a04fbf32-6248-4b73-80cd-9fd3146ce3d5" />        
+
+<img width="722" height="253" alt="image" src="https://github.com/user-attachments/assets/aed424c3-aead-4b35-a602-47369884e9ee" />         
+<img width="1363" height="619" alt="image" src="https://github.com/user-attachments/assets/f3df4d9d-3233-49c7-93c8-992a5814e835" />          
+
 <img width="1814" height="352" alt="image" src="https://github.com/user-attachments/assets/feb23341-7b5d-46fd-8909-ca8fdb9f787b" />              
 <img width="702" height="251" alt="image" src="https://github.com/user-attachments/assets/d838d070-8aef-4247-b0b8-b8f5c7a56ab9" />                 
 
