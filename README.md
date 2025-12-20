@@ -4,9 +4,22 @@
 
 **Mini Social** là một nền tảng mạng xã hội đơn giản được phát triển bằng PHP thuần, cho phép người dùng đăng ký, đăng bài viết, tìm kiếm và quản lý nội dung. Dự án này được thiết kế cho mục đích học tập và nghiên cứu về các lỗ hổng bảo mật web phổ biến.
 
-[Hoàng Quang Sơn: 22810310275 ] |  Lý thuyết và Khai thác SQL Injection (SQLi, phân tích cơ chế SQLi và phương pháp phòng chống. Thiết lập Burp Suite Proxy, thực hiện demo khai thác SQLi (Bypass Login) bằng Burp Repeater và viết phần khắc phục code SQLi.
-[Phùng Tiến Đạt: 22810310228 ] |  Lý thuyết và Khai thác Cross-Site Scripting (XSS), phân tích cơ chế XSS và phương pháp phòng chống. Code ứng dụng web demo, thực hiện demo khai thác Stored XSS (đánh cắp Cookie) và viết phần khắc phục code XSS.
-[Phan Đức Dương: 22810310282 ] |  Cơ sở hạ tầng và Tổng hợp Báo cáo: Cài đặt và cấu hình môi trường thực nghiệm (XAMPP, CSDL). Hỗ trợ chụp ảnh minh họa Burp Suite, biên tập và tổng hợp báo cáo chuyên đề
+[Hoàng Quang Sơn: 22810310275 ] |  Lý thuyết và Khai thác SQL Injection (SQLi, phân tích cơ chế SQLi và phương pháp phòng chống. Thiết lập Burp Suite Proxy, thực hiện demo khai thác SQLi (Bypass Login) bằng Burp Repeater và viết phần khắc phục code SQLi.        
+
+
+[Phùng Tiến Đạt: 22810310228 ] |  Lý thuyết và Khai thác Cross-Site Scripting (XSS), phân tích cơ chế XSS và phương pháp phòng chống. Code ứng dụng web demo, thực hiện demo khai thác Stored XSS (đánh cắp Cookie) và viết phần khắc phục code XSS.         
+
+
+[Phan Đức Dương: 22810310282 ] |  Cơ sở hạ tầng và Tổng hợp Báo cáo: Cài đặt và cấu hình môi trường thực nghiệm (XAMPP, CSDL). Hỗ trợ chụp ảnh minh họa Burp Suite, biên tập và tổng hợp báo cáo chuyên đề    
+
+
+<img width="748" height="581" alt="image" src="https://github.com/user-attachments/assets/58511424-b0bf-46e9-8b9c-235d886c304b" />             
+<img width="722" height="253" alt="image" src="https://github.com/user-attachments/assets/aed424c3-aead-4b35-a602-47369884e9ee" />                
+<img width="1814" height="352" alt="image" src="https://github.com/user-attachments/assets/feb23341-7b5d-46fd-8909-ca8fdb9f787b" />              
+<img width="702" height="251" alt="image" src="https://github.com/user-attachments/assets/d838d070-8aef-4247-b0b8-b8f5c7a56ab9" />                 
+
+
+
 
 
 
