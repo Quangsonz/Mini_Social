@@ -4,9 +4,9 @@
 
 **Mini Social** là một nền tảng mạng xã hội đơn giản được phát triển bằng PHP thuần, cho phép người dùng đăng ký, đăng bài viết, tìm kiếm và quản lý nội dung. Dự án này được thiết kế cho mục đích học tập và nghiên cứu về các lỗ hổng bảo mật web phổ biến.
 
-Hoàng Quang Sơn: 22810310275  |  Lý thuyết và Khai thác SQL Injection (SQLi, phân tích cơ chế SQLi và phương pháp phòng chống. Thiết lập Burp Suite Proxy, thực hiện demo khai thác SQLi (Bypass Login) bằng Burp Repeater và viết phần khắc phục code SQLi.
-Phùng Tiến Đạt: 22810310228  |  Lý thuyết và Khai thác Cross-Site Scripting (XSS), phân tích cơ chế XSS và phương pháp phòng chống. Code ứng dụng web demo, thực hiện demo khai thác Stored XSS (đánh cắp Cookie) và viết phần khắc phục code XSS.
-Phan Đức Dương: 22810310282  |  Cơ sở hạ tầng và Tổng hợp Báo cáo: Cài đặt và cấu hình môi trường thực nghiệm (XAMPP, CSDL). Hỗ trợ chụp ảnh minh họa Burp Suite, biên tập và tổng hợp báo cáo chuyên đề
+[Hoàng Quang Sơn: 22810310275 ] |  Lý thuyết và Khai thác SQL Injection (SQLi, phân tích cơ chế SQLi và phương pháp phòng chống. Thiết lập Burp Suite Proxy, thực hiện demo khai thác SQLi (Bypass Login) bằng Burp Repeater và viết phần khắc phục code SQLi.
+[Phùng Tiến Đạt: 22810310228 ] |  Lý thuyết và Khai thác Cross-Site Scripting (XSS), phân tích cơ chế XSS và phương pháp phòng chống. Code ứng dụng web demo, thực hiện demo khai thác Stored XSS (đánh cắp Cookie) và viết phần khắc phục code XSS.
+[Phan Đức Dương: 22810310282 ] |  Cơ sở hạ tầng và Tổng hợp Báo cáo: Cài đặt và cấu hình môi trường thực nghiệm (XAMPP, CSDL). Hỗ trợ chụp ảnh minh họa Burp Suite, biên tập và tổng hợp báo cáo chuyên đề
 
 
 
